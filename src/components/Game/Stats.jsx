@@ -18,9 +18,7 @@ const Stats = () => {
             })
                 .then((response) => response.json())
                 .then((data) =>{
-                    console.log(data)
-                    setUserStats(data)} )
-                console.log(userStats);
+                    setUserStats([data[0].points, data[0].streak_points])} )
         }
     },[])
 
@@ -28,8 +26,8 @@ const Stats = () => {
         <div className="stats">
             <h1>ESTADÍSTICAS</h1>
             <div>
-                <p>Puntos: {userStats[0].points}</p>
-                <p>Racha: {userStats[0].streak_points}</p>
+                <p>Puntos: {userStats[0]}</p>
+                <p>Racha: {userStats[1]}</p>
             </div>
         </div>
 

@@ -6,6 +6,7 @@ import { Link, Navigate, Router } from "react-router-dom";
 const Login = (props) => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
 
     const url ="http://localhost:8080/login"
 
@@ -39,6 +40,8 @@ const Login = (props) => {
                 props.setLogInTrue()
                 localStorage.setItem('userToken',data.token)
                 localStorage.setItem('userId', data.userId)
+            } else {
+                setMessage(data.message)
             }
         })
     }
@@ -52,7 +55,7 @@ const Login = (props) => {
             <input name="loginPassword" type="password" onInput={handlePassword}/>
 
             <button type="button" onClick={handleButton}>Log In</button>
-            
+            <p>{message && message}</p>
             <Link to={"/register"}>Registrate</Link>
         </form>
     )

@@ -18,7 +18,6 @@ function App() {
 
   const setLogInTrue = () =>{
     setUserLogged(true)
-    console.log("ENTRE", userLogged)
   }
 
   return (

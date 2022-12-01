@@ -30,7 +30,6 @@ const Register = (props) => {
             email: email,
             password: password
         }
-        console.log(userToRegister)
         await fetch(url, {
             method: 'POST',
             headers:{
@@ -42,6 +41,8 @@ const Register = (props) => {
         .then((response) => {
             if(response.status == 204){
                 setCreatedMessage("Usuario creado exitosamente, regrese al login para iniciar sesión")
+            } else {
+                setCreatedMessage("Email ya registrado")
             }
         })
     }
