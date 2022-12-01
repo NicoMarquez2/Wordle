@@ -1,0 +1,37 @@
+
+.loginForm, .registerForm{
+  margin: 0 auto;
+  height: 10vh;
+  display: flex;
+  flex-direction: column;
+  gap: 1vh;
+  width: 30vw;
+}
+
+.game{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.table{
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  margin: 0 auto;
+  height: 50vh;
+  width: 15vw;
+  justify-content: space-evenly;
+}
+
+.tableInput{
+  width: 4vh;
+  height: 4vh;
+  text-align: center;
+  font-size: 4vh;
+}
+
+.inputRow{
+  display: flex;
+  justify-content: space-between;
+}
