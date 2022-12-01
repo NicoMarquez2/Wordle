@@ -21,7 +21,7 @@ const GameTable = (props) => {
     }
 
     return(
-        <div className="table" >
+        <div className="taasdasdadle" >
             <form className="inputRow" disabled={true}>
                 <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
                 <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
