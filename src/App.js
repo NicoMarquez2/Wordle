@@ -16,8 +16,8 @@ function App() {
     }
   },[])
 
-  const setLogInTrue = () =>{
-    setUserLogged(true)
+  const setLogIn = () =>{
+    setUserLogged(!userLogged)
   }
 
   return (
@@ -26,7 +26,7 @@ function App() {
         <Routes>
             <Route
               path="/"
-              element={userLogged ? <Game></Game> : <Login setLogInTrue={setLogInTrue}></Login>}
+              element={userLogged ? <Game setLogin={setLogIn}></Game> : <Login setLogIn={setLogIn}></Login>}
             />
             <Route
               path="/register"

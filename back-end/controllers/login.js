@@ -1,10 +1,11 @@
-const bcrypt = require('bcrypt')
+//const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const express = require('express')
 const router = express.Router();
 const { TOKEN_SECRET,verifyToken } = require('../middlewares/validate-jwt');
 const { User } = require('../models/user')
 const { UserStats } = require('../models/userStats')
+const bcrypt = require('bcrypt')
 
 async function createUserStats(mail){
     const userCrated = await User.findAll({
@@ -28,15 +29,21 @@ router.post('/register', async (req, res) => {
     const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(req.body.password, salt)
 
+    console.log("ENTRO POST REGISTER")
+
     const user = await User.findAll({
         where:{
             email: req.body.email
         }
     })
 
-    if(user){
+    console.log("BUSCO SI MAIL EXISTE")
+
+    if(user [0]){
+        console.log("ENTRO IF")
         res.status(400).send({message: "Ese email ya está registrado"})
     } else {
+        console.log("AMSDNLKJASDNl")
         const newUser = {
             name: req.body.name,
             email: req.body.email,

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 //import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { Link, Navigate, Router } from "react-router-dom";
+import { Link, Navigate, redirect, Router } from "react-router-dom";
 
 const Login = (props) => {
     const [email, setEmail] = useState("")
@@ -37,7 +37,7 @@ const Login = (props) => {
         .then((response) => response.json())
         .then((data)=>{
             if(data.token){
-                props.setLogInTrue()
+                props.setLogIn()
                 localStorage.setItem('userToken',data.token)
                 localStorage.setItem('userId', data.userId)
             } else {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import WordInput from "./WordInput";
 
 const GameTable = (props) => {
 
@@ -22,48 +23,13 @@ const GameTable = (props) => {
 
     return(
         <div className="table" >
-            <form className="inputRow" disabled={true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
-            <form className="inputRow" disabled={(activeInput===1)? false : true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
-            <form className="inputRow" disabled={(activeInput===1)? false : true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
-            <form className="inputRow" disabled={(activeInput===1)? false : true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
-            <form className="inputRow" disabled={(activeInput===1)? false : true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
-            <form className="inputRow" disabled={(activeInput===1)? false : true}>
-                <input name="input-1" className="tableInput" type="text" disabled={(activeInput===1)? false : true} onInput={handleInput}/>
-                <input name="input-2" className="tableInput" type="text" disabled={(activeInput===2)? false : true} onInput={handleInput}/>
-                <input name="input-3" className="tableInput" type="text" disabled={(activeInput===3)? false : true} onInput={handleInput}/>
-                <input name="input-4" className="tableInput" type="text" disabled={(activeInput===4)? false : true} onInput={handleInput}/>
-                <input name="input-5" className="tableInput" type="text" disabled={(activeInput===5)? false : true} onInput={handleInput}/>
-            </form>
+            <WordInput handleInput={handleInput} disabled={(activeInput===1)? false : true}></WordInput>
+            <WordInput handleInput={handleInput} disabled={(activeInput===2)? false : true}></WordInput>
+            <WordInput handleInput={handleInput} disabled={(activeInput===3)? false : true}></WordInput>
+            <WordInput handleInput={handleInput} disabled={(activeInput===4)? false : true}></WordInput>
+            <WordInput handleInput={handleInput} disabled={(activeInput===5)? false : true}></WordInput>
+            <WordInput handleInput={handleInput} disabled={(activeInput===6)? false : true}></WordInput>
+      
             <button type="button" onClick={handleButton}>ENVIAR</button>
         </div>
     )
