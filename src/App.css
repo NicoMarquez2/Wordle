@@ -29,6 +29,14 @@
   height: 4vh;
   text-align: center;
   font-size: 4vh;
+  border-width: 0.3vh;
+  border-radius: 1vh;
+  background-color: white;
+}
+
+.tableInput:focus{
+  border-color: red;
+  border-width: .5vh;
 }
 
 .inputRow{

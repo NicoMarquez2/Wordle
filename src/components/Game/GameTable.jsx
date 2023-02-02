@@ -14,21 +14,23 @@ const GameTable = (props) => {
 
     async function handleButton(){
         console.log(props.word)
+        console.log(inputWord)
         if(props.word == inputWord){
             setIsWinner(true)
         } else if(activeInput != 6){
             setActiveInput(activeInput + 1)
         }
+        
     }
 
     return(
         <div className="table" >
-            <WordInput handleInput={handleInput} disabled={(activeInput===1)? false : true}></WordInput>
-            <WordInput handleInput={handleInput} disabled={(activeInput===2)? false : true}></WordInput>
-            <WordInput handleInput={handleInput} disabled={(activeInput===3)? false : true}></WordInput>
-            <WordInput handleInput={handleInput} disabled={(activeInput===4)? false : true}></WordInput>
-            <WordInput handleInput={handleInput} disabled={(activeInput===5)? false : true}></WordInput>
-            <WordInput handleInput={handleInput} disabled={(activeInput===6)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===1)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===2)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===3)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===4)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===5)? false : true}></WordInput>
+            <WordInput word={setInputWord} handleInput={handleInput} disabled={(activeInput===6)? false : true}></WordInput>
       
             <button type="button" onClick={handleButton}>ENVIAR</button>
         </div>
