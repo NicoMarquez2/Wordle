@@ -1,27 +1,87 @@
 
+.app{
+  height: 100vh;
+  width: 100vw;
+}
+
+button{
+  padding: 4px;
+  border-radius: 1vh;
+  background-color: rgba(0, 0, 255, 0.31);
+}
+
 .loginForm, .registerForm{
-  margin: 0 auto;
-  height: 10vh;
+  box-shadow: inset;
+  box-shadow: 3vh;
+  box-shadow: black;
+  border-width: .3vh;
+  border-style: inset;
+  border-color: blue;
+  border-radius: 3vh;
+  height: 50%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 1vh;
-  width: 30vw;
+  width: 20vw;
+  background-color: rgba(0, 17, 141, 0.476);
+}
+
+.registerForm input{
+  border-width: .3vh;
+  border-style: inset;
+  border-color: blue;
+  border-radius: 1vh;
+  width: 60%;
+}
+
+.loginForm input{
+  border-width: .3vh;
+  border-style: inset;
+  border-color: blue;
+  border-radius: 1vh;
+  width: 60%;
+}
+
+.forms{
+  display: grid;
+  place-items: center;
+  height: 100%;
+  width: 100%;
+}
+.logOutButton{
+  grid-column: 2/3;
+  grid-row: 1/2;
 }
 
 .game{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  place-items: center;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 4% 48% 48%;
   height: 100%;
 }
 
 .table{
+  grid-column: 2/3;
+  grid-row: 2/4;
   display: flex;
   flex-direction: column;
   gap: 10%;
-  margin: 0 auto;
-  height: 50vh;
+  height: 30vh;
   width: 15vw;
   justify-content: space-evenly;
+}
+
+.topStats{
+  grid-column: 1/2;
+  grid-row: 2/3;
+}
+
+.stats{
+  grid-column: 1/2;
+  grid-row: 3/4;
 }
 
 .tableInput{
@@ -29,17 +89,31 @@
   height: 4vh;
   text-align: center;
   font-size: 4vh;
-  border-width: 0.3vh;
+  border-width: 0.5vh;
   border-radius: 1vh;
   background-color: white;
 }
 
 .tableInput:focus{
-  border-color: red;
+  border-color: blue;
   border-width: .5vh;
 }
 
 .inputRow{
   display: flex;
   justify-content: space-between;
+}
+
+.yellow{
+  background-color: yellow;
+  color: white;
+}
+
+.green{
+  background-color: greenyellow;
+  color: white;
+}
+
+.red{
+  background-color: red;
 }

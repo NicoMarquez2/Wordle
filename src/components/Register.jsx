@@ -48,21 +48,24 @@ const Register = (props) => {
     }
 
     return(
-        <form className="registerForm" onSubmit={(e)=>e.preventDefault()}>
-            <label htmlFor="registerName">Name</label>
-            <input name="registerName" type="text" onInput={handleName}/>
+        <div className="forms">
+            <form className="registerForm" onSubmit={(e)=>e.preventDefault()}>
+                <label htmlFor="registerName">Name</label>
+                <input placeholder="Ingresa tu nombre" name="registerName" type="text" onInput={handleName}/>
 
-            <label htmlFor="registerEmail">E-mail</label>
-            <input name="registerEmail" type="mail" onInput={handleEmail}/>
+                <label htmlFor="registerEmail">E-mail</label>
+                <input placeholder="Ingresa tu e-mail" name="registerEmail" type="mail" onInput={handleEmail}/>
 
-            <label htmlFor="registerPassword">Password</label>
-            <input name="registerPassword" type="password" onInput={handlePassword}/>
+                <label htmlFor="registerPassword">Password</label>
+                <input placeholder="ingresa tu contrseña" name="registerPassword" type="password" onInput={handlePassword}/>
 
-            <p>{createdMessage && createdMessage}</p>
+                <p>{createdMessage && createdMessage}</p>
 
-            <button type="submit" onClick={handleButton}>Register</button>
-            <Link to={"/"}><button type="button">Back to LogIn</button></Link>
-        </form>
+                <button type="submit" onClick={handleButton}>Register</button>
+                <Link to={"/"}><button type="button">Back to LogIn</button></Link>
+            </form>
+        </div>
+
     )
 }
 

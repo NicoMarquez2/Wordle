@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { redirect } from "react-router-dom";
+import TopStats from "../TopStats";
 import GameTable from "./GameTable";
-import Keyboard from "./Keyboard";
 import Stats from "./Stats";
 
 const Game = (props) => {
@@ -31,17 +31,14 @@ const Game = (props) => {
     }
 
     return(
-        <React.Fragment>
+        <div className="game">
             <div className="logOutButton">
                 <button onClick={handleButton}>Cerrar sesion</button>
             </div>
-            <div className="game">             
-                <GameTable word={word}></GameTable>
-                <Keyboard></Keyboard>
-                <Stats></Stats>
-            </div>
-        </React.Fragment>
-
+            <GameTable word={word}></GameTable>
+            <TopStats></TopStats>
+            <Stats></Stats>
+        </div>
     )
 }
 

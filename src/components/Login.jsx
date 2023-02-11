@@ -47,17 +47,19 @@ const Login = (props) => {
     }
 
     return(
-        <form className="loginForm" onSubmit={(e)=>e.preventDefault()}>
-            <label htmlFor="loginEmail">E-mail</label>
-            <input name="loginEmail" type="mail" onInput={handleEmail}/>
+        <div className="forms">
+            <form className="loginForm" onSubmit={(e)=>e.preventDefault()}>
+                <label htmlFor="loginEmail">E-mail</label>
+                <input placeholder="Ingresa tu e-mail" name="loginEmail" type="mail" onInput={handleEmail}/>
 
-            <label htmlFor="loginPassword">Password</label>
-            <input name="loginPassword" type="password" onInput={handlePassword}/>
+                <label htmlFor="loginPassword">Password</label>
+                <input placeholder="Ingresa tu contraseña" name="loginPassword" type="password" onInput={handlePassword}/>
 
-            <button type="button" onClick={handleButton}>Log In</button>
-            <p>{message && message}</p>
-            <Link to={"/register"}>Registrate</Link>
-        </form>
+                <button type="button" onClick={handleButton}>Log In</button>
+                <p>{message && message}</p>
+                <Link to={"/register"}><button type="button">Registrate</button></Link>
+            </form>
+        </div>
     )
 }
 
