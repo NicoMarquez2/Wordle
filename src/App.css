@@ -53,19 +53,20 @@ button{
 .logOutButton{
   grid-column: 2/3;
   grid-row: 1/2;
+  justify-self: end;
 }
 
 .game{
   display: grid;
   place-items: center;
   grid-template-columns: 20% 80%;
-  grid-template-rows: 4% 48% 48%;
+  grid-template-rows: 4% 4% 46% 46%;
   height: 100%;
 }
 
 .table{
   grid-column: 2/3;
-  grid-row: 2/4;
+  grid-row: 3/5;
   display: flex;
   flex-direction: column;
   gap: 10%;
@@ -76,12 +77,13 @@ button{
 
 .topStats{
   grid-column: 1/2;
-  grid-row: 2/3;
+  grid-row: 3/4;
+  align-self: start;
 }
 
 .stats{
   grid-column: 1/2;
-  grid-row: 3/4;
+  grid-row: 4/5;
 }
 
 .tableInput{
