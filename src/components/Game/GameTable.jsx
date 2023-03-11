@@ -1,17 +1,53 @@
 import React, { useEffect, useState } from "react";
+import Letter from "./Letter";
 import WordInput from "./WordInput";
 
 const GameTable = (props) => {
+    const validKeys = "qwertyuiopasdfghjklñzxcvbnm"
+
+    const [table, setTable] =useState([
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""],
+        ["","","","",""]
+    ])
 
     const [inputWord, setInputWord] = useState("")
-    const [activeInput, setActiveInput] = useState(1)
+    const [activeRow, setActiveRow] = useState(0)
+    const [activePosition, setActivePosition] = useState(0)
     const [isWinner, setIsWinner] = useState(false)
     const [click, setClick] = useState(false)
     const [error, setError] = useState(false)
 
+    function handleGameOver(isWinner){
+        if(isWinner){
+            console.log("ESAAAAA")
+        } else {
+            console.log("PT")
+        }
+    }
+
     const handleKeyDown = (e) => {
-        if(e.key == "Enter"){
-            handleButton()
+        const newTable =[...table]
+        const found = validKeys.indexOf(e.key)
+        if (e.key == "Enter") {
+            handleSend()
+        } else if (e.key == "Backspace") {
+            if(activePosition == 0){
+                newTable[activeRow][activePosition] = ""
+                setTable(newTable)
+            } else {
+                newTable[activeRow][activePosition - 1] = ""
+                setTable(newTable)
+                setActivePosition(activePosition - 1)
+            }
+        } else if(found != -1){
+            if(activePosition > 4) return
+            newTable[activeRow][activePosition] = e.key.toUpperCase()
+            setTable(newTable)
+            setActivePosition(activePosition + 1)
         }
     }
     
@@ -23,32 +59,67 @@ const GameTable = (props) => {
         console.log(inputWord)
     }*/
 
-    async function handleButton(){
-        setClick(!click)
-        console.log(error)
-        if(error){
-            console.log("TE FALTAN LETRAS PETE")
+    function handleSend(){
+        if(table[activeRow].toString().replace(/,/g,"").toLowerCase() === props.word){
+            console.log("ESA")
+            setIsWinner(true)
+            handleGameOver(isWinner)
+        }
+        if(activePosition < 5) return
+        if(activeRow == 5){
+            handleGameOver()
         } else {
-            console.log(props.word)
-            console.log(inputWord)
-            if(props.word == inputWord){
-                setIsWinner(true)
-            } else if(activeInput != 6){
-                setActiveInput(activeInput + 1)
-            }
+            setActiveRow(activeRow + 1)
+            setActivePosition(0)
         }
     }
 
     return(
         <div className="table" onKeyDown={(e) => handleKeyDown(e)}>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===1)? false : true}></WordInput>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===2)? false : true}></WordInput>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===3)? false : true}></WordInput>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===4)? false : true}></WordInput>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===5)? false : true}></WordInput>
-            <WordInput word={props.word} setError={setError} click={click} setInputWord={setInputWord} disabled={(activeInput===6)? false : true}></WordInput>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={0} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={0} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={0} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={0} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={0} position={4}/>
+            </div>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={1} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={1} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={1} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={1} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={1} position={4}/>
+            </div>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={2} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={2} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={2} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={2} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={2} position={4}/>
+            </div>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={3} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={3} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={3} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={3} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={3} position={4}/>
+            </div>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={4} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={4} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={4} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={4} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={4} position={4}/>
+            </div>
+            <div className="inputRow">
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={5} position={0}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={5} position={1}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={5} position={2}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={5} position={3}/>
+                <Letter table={table} activeRow={activeRow} activePosition={activePosition} attempt={5} position={4}/>
+            </div>
 
-            <button type="button" onClick={handleButton}>ENVIAR</button>
+            <button type="button" onClick={handleSend}>ENVIAR</button>
             {/*<button type="button" onClick={mostrarPalabra}>MOSTRAR PALABRA</button>*/}
         </div>
     )

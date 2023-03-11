@@ -71,7 +71,7 @@ button{
   flex-direction: column;
   gap: 10%;
   height: 30vh;
-  width: 15vw;
+  width: 16vw;
   justify-content: space-evenly;
 }
 
@@ -116,6 +116,29 @@ button{
   color: white;
 }
 
-.red{
-  background-color: red;
+.grey{
+  background-color: gray;
+  color: white;
+}
+
+.active{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid blue;
+  border-radius: 10px;
+  height: 6vh;
+  width: 6vh;
+  font-size: 3rem;
+}
+
+.letter{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid black;
+  border-radius: 10px;
+  height: 6vh;
+  width: 6vh;
+  font-size: 3rem;
 }
