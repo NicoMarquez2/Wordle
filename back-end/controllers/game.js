@@ -32,5 +32,10 @@ router.get('/', async (req, res) => {
     res.send(myWord)
 })
 
+router.get('/all', async (req, res) => {
+    const allWords = await Word.findAll
+    res.status(200).send({allWords})
+})
+
 
 module.exports = router

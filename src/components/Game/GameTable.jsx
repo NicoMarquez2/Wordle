@@ -4,6 +4,14 @@ import WordInput from "./WordInput";
 
 const GameTable = (props) => {
     const validKeys = "qwertyuiopasdfghjklñzxcvbnm"
+    const gameUrl = "http://localhost:8080/play"
+    const points = {
+        0: 10,
+        1: 8,
+        2: 4,
+        3: 2,
+        4: 1
+    }
 
     const [table, setTable] =useState([
         ["","","","",""],
@@ -17,15 +25,38 @@ const GameTable = (props) => {
     const [inputWord, setInputWord] = useState("")
     const [activeRow, setActiveRow] = useState(0)
     const [activePosition, setActivePosition] = useState(0)
-    const [isWinner, setIsWinner] = useState(false)
     const [click, setClick] = useState(false)
     const [error, setError] = useState(false)
 
+    async function sendPoints(n){
+        const data = {
+            pointsGained: points.n,
+            streak: true
+        }
+        await fetch(gameUrl,{
+            method: 'POST',
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+    }
+
+    async function checkWord(){
+        await fetch(`${gameUrl}/all`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+    }
+
     function handleGameOver(isWinner){
         if(isWinner){
-            console.log("ESAAAAA")
+            props.message("Felicidades, ganaste ")
+            setActivePosition(undefined)
+            setActiveRow(undefined)
+            sendPoints(activeRow)
         } else {
-            console.log("PT")
+            props.message(`Perdiste, la palabra era: ${props.word}`)
         }
     }
 
@@ -50,24 +81,19 @@ const GameTable = (props) => {
             setActivePosition(activePosition + 1)
         }
     }
-    
-    /*useEffect(() => {
-        console.log("MUESTRO PALABRA",inputWord)
-    },[inputWord])
-
-    function mostrarPalabra(){
-        console.log(inputWord)
-    }*/
 
     function handleSend(){
-        if(table[activeRow].toString().replace(/,/g,"").toLowerCase() === props.word){
+        const userWord = table[activeRow].toString().replace(/,/g,"").toLowerCase()
+        checkWord()
+        if(activePosition < 5) return
+
+        if(userWord === props.word){
             console.log("ESA")
-            setIsWinner(true)
             handleGameOver(true)
         }
-        if(activePosition < 5) return
         if(activeRow == 5){
-            handleGameOver()
+            handleGameOver(false)
+            setActiveRow(0)
         } else {
             setActiveRow(activeRow + 1)
             setActivePosition(0)

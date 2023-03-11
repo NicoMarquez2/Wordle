@@ -8,6 +8,7 @@ const Game = (props) => {
 
     const gameUrl = "http://localhost:8080/play"
     const [word, setWord] = useState("")
+    const [message, setMessage] = useState("")
 
     const getWord = async () => {
         let myWord
@@ -35,7 +36,8 @@ const Game = (props) => {
             <div className="logOutButton">
                 <button onClick={handleButton}>Cerrar sesion</button>
             </div>
-            <GameTable word={word}></GameTable>
+            <p className="message">{message}</p>
+            <GameTable word={word} message={setMessage}></GameTable>
             <TopStats></TopStats>
             <Stats></Stats>
         </div>
