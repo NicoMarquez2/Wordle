@@ -106,17 +106,17 @@ button{
   justify-content: space-between;
 }
 
-.yellow{
+#close{
   background-color: yellow;
   color: white;
 }
 
-.green{
+#correct{
   background-color: greenyellow;
   color: white;
 }
 
-.grey{
+#incorrect{
   background-color: gray;
   color: white;
 }
