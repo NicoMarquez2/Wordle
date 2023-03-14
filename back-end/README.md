@@ -9,23 +9,37 @@ This project was made with Node.JS, Express and PostresSQL
 -Create a data base named "wordle"
 
 -Create a table named "users" whith four columns:
+
     -id (primary key and auto incremental) || Data type: bigint
+
     -name || Data type: character varying
+
     -email || Data type: character varying
+
     -password || Data type: character varying
 
 -Create a table named "user_stats" whith five columns:
+
     -id (primary key and auto incremental) || Data type: bigint
+
     -user_id (foreign key to the column "id" from the table "users") || bigint
+
     -points || Data type: bigint
+
     -strak ||  Data type: boolean
+
     -streak_points || Data type: integer
 
+
 -Create a table named "words" whith two columns:
+
     -id (primary key and auto incremental) || Data type: bigint
+
     -word || Data type: character varying
 
+
 -Run this SQL script to fill the "words" table:
+
 INSERT INTO public.words(word)
 	VALUES ('tacon'), ('canoa'), ('gorro'), ('avion'), ('aureo'), ('flora'), ('cargo'), ('abrir'),
 	('botas'), ('deber'), ('dolar'), ('galgo'), ('japon'), ('lento'), ('aboya'), ('abran'),
