@@ -21,12 +21,9 @@ const GameTable = (props) => {
         ["","","","",""],
         ["","","","",""]
     ])
-
-    const [inputWord, setInputWord] = useState("")
+    const [validWord, setValidWord] = useState()
     const [activeRow, setActiveRow] = useState(0)
     const [activePosition, setActivePosition] = useState(0)
-    const [click, setClick] = useState(false)
-    const [error, setError] = useState(false)
 
     async function sendPoints(n){
         const data = {
@@ -43,10 +40,28 @@ const GameTable = (props) => {
         })
     }
 
-    async function checkWord(){
-        await fetch(`${gameUrl}/all`)
+    async function checkWord(userWord){
+        const word = userWord
+        const isValid = false
+
+        console.log(word)
+        await fetch(`${gameUrl}/all`,{
+            method: "POST",
+            body: JSON.stringify({word}),
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
         .then(response => response.json())
-        .then(data => console.log(data))
+        .then(data => isValid = data)
+
+        console.log("ESTADO", isValid)
+        if(isValid){
+            return true
+        } else {
+            return false
+        }
     }
 
     function handleGameOver(isWinner){
@@ -61,6 +76,7 @@ const GameTable = (props) => {
     }
 
     const handleKeyDown = (e) => {
+        e.preventDefault()
         const newTable =[...table]
         const found = validKeys.indexOf(e.key)
         if (e.key == "Enter") {
@@ -84,19 +100,25 @@ const GameTable = (props) => {
 
     function handleSend(){
         const userWord = table[activeRow].toString().replace(/,/g,"").toLowerCase()
-        checkWord()
-        if(activePosition < 5) return
+        console.log(userWord)
+        console.log("CHECK", checkWord(userWord))
+        if(checkWord(userWord)){
+            console.log("PUSISTE UNA BIEN PA")
+            if(activePosition < 5) return
 
-        if(userWord === props.word){
-            console.log("ESA")
-            handleGameOver(true)
-        }
-        if(activeRow == 5){
-            handleGameOver(false)
-            setActiveRow(0)
+            if(userWord === props.word){
+                console.log("ESA")
+                handleGameOver(true)
+            }
+            if(activeRow == 5){
+                handleGameOver(false)
+                setActiveRow(0)
+            } else {
+                setActiveRow(activeRow + 1)
+                setActivePosition(0)
+            }
         } else {
-            setActiveRow(activeRow + 1)
-            setActivePosition(0)
+            console.log("PONE UNA PALABRA BIEN PA")
         }
     }
 
@@ -146,7 +168,6 @@ const GameTable = (props) => {
             </div>
 
             <button type="button" onClick={handleSend}>ENVIAR</button>
-            {/*<button type="button" onClick={mostrarPalabra}>MOSTRAR PALABRA</button>*/}
         </div>
     )
 }

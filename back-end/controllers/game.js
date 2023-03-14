@@ -23,7 +23,7 @@ function getWord(min, max){
 }
 
 router.get('/', async (req, res) => {
-    const wordId = getWord(1, 15)
+    const wordId = getWord(1, 245)
     const myWord = await Word.findAll({
         where:{
             id: wordId
@@ -32,9 +32,19 @@ router.get('/', async (req, res) => {
     res.send(myWord)
 })
 
-router.get('/all', async (req, res) => {
-    const allWords = await Word.findAll
-    res.status(200).send({allWords})
+router.post('/all', async (req, res) => {
+    const word = req.body.word
+    const allWords = await Word.findAll()
+
+    const words = allWords.map((element) => (element.dataValues.word))
+
+    //console.log("ASDASNS",words.find(element => element == word))
+
+    if(words.includes(word)){
+        res.status(200).send(true)
+    } else {
+        res.status(200).send(false)
+    }
 })
 
 
