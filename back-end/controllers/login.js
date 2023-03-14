@@ -26,10 +26,9 @@ async function createUserStats(mail){
 }
 
 router.post('/register', async (req, res) => {
-    const salt = await bcrypt.genSalt(10)
+    try {
+        const salt = await bcrypt.genSalt(10)
     const password = await bcrypt.hash(req.body.password, salt)
-
-    console.log("ENTRO POST REGISTER")
 
     const user = await User.findAll({
         where:{
@@ -37,13 +36,9 @@ router.post('/register', async (req, res) => {
         }
     })
 
-    console.log("BUSCO SI MAIL EXISTE")
-
     if(user [0]){
-        console.log("ENTRO IF")
         res.status(400).send({message: "Ese email ya está registrado"})
     } else {
-        console.log("AMSDNLKJASDNl")
         const newUser = {
             name: req.body.name,
             email: req.body.email,
@@ -56,34 +51,40 @@ router.post('/register', async (req, res) => {
         })
         .then(()=>{res.status(204).send({message: "Usuario creado exitosamente"})})
     }   
+    } catch (error) {
+        res.status(400).send(error)
+    }  
 })
 
 router.post('/login', async (req, res) => {
-    const user = await User.findAll({
-        where:{
-            email: req.body.email
-        }
-    })
-
-    if(user[0]){
-        const userId = user[0].dataValues.id
-        const validPassword = await bcrypt.compare(req.body.password, user[0].dataValues.password)
+    try {
+        const user = await User.findAll({
+            where:{
+                email: req.body.email
+            }
+        })
     
-        if(!validPassword){
-            res.status(401).send({message: 'El usuario no es valido'})        
+        if(user[0]){
+            const userId = user[0].dataValues.id
+            const validPassword = await bcrypt.compare(req.body.password, user[0].dataValues.password)
+        
+            if(!validPassword){
+                res.status(401).send({message: 'El usuario no es valido'})        
+            }
+            else{
+                const token = jwt.sign({
+                    name: user.name,
+                    id: user.email
+                }, TOKEN_SECRET)
+        
+                res.send({message:'Login exitoso',token, userId})
+            }
+        } else {
+            res.status(402).send({message: 'Email no registrado'})
         }
-        else{
-            const token = jwt.sign({
-                name: user.name,
-                id: user.email
-            }, TOKEN_SECRET)
-    
-            res.send({message:'Login exitoso',token, userId})
-        }
-    } else {
-        res.status(402).send({message: 'Email no registrado'})
+    } catch (error) {
+        res.status(400).send(error)
     }
-
 })
 
 module.exports = router

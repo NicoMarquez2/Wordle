@@ -22,7 +22,7 @@ This project was made with Node.JS, Express and PostresSQL
 
     -id (primary key and auto incremental) || Data type: bigint
 
-    -user_id (foreign key to the column "id" from the table "users") || bigint
+    -user_id (foreign key to the column "id" from the table "users") || Data type: bigint
 
     -points || Data type: bigint
 
@@ -38,7 +38,7 @@ This project was made with Node.JS, Express and PostresSQL
     -word || Data type: character varying
 
 
--Run this SQL script to fill the "words" table:
+-Run this SQL query to fill the "words" table:
 
 INSERT INTO public.words(word)
 	VALUES ('tacon'), ('canoa'), ('gorro'), ('avion'), ('aureo'), ('flora'), ('cargo'), ('abrir'),
