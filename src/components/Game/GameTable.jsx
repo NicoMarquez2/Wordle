@@ -5,12 +5,13 @@ import WordInput from "./WordInput";
 const GameTable = (props) => {
     const validKeys = "qwertyuiopasdfghjklñzxcvbnm"
     const gameUrl = "http://localhost:8080/play"
+    const statsUrl = "http://localhost:8080/stats"
     const points = {
-        0: 10,
-        1: 8,
-        2: 4,
-        3: 2,
-        4: 1
+        "0": 10,
+        "1": 8,
+        "2": 4,
+        "3": 2,
+        "4": 1
     }
 
     const [table, setTable] =useState([
@@ -21,55 +22,34 @@ const GameTable = (props) => {
         ["","","","",""],
         ["","","","",""]
     ])
-    const [validWord, setValidWord] = useState()
+
     const [activeRow, setActiveRow] = useState(0)
     const [activePosition, setActivePosition] = useState(0)
 
     async function sendPoints(n){
+        const row = n
+
         const data = {
-            pointsGained: points.n,
+            pointsGained: points[row],
             streak: true
         }
-        await fetch(gameUrl,{
+        await fetch(statsUrl,{
             method: 'POST',
             headers:{
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'userId': localStorage.getItem('userId')
             },
             body: JSON.stringify(data)
         })
     }
 
-    async function checkWord(userWord){
-        const word = userWord
-        const isValid = false
-
-        console.log(word)
-        await fetch(`${gameUrl}/all`,{
-            method: "POST",
-            body: JSON.stringify({word}),
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            }
-        })
-        .then(response => response.json())
-        .then(data => isValid = data)
-
-        console.log("ESTADO", isValid)
-        if(isValid){
-            return true
-        } else {
-            return false
-        }
-    }
-
     function handleGameOver(isWinner){
         if(isWinner){
             props.message("Felicidades, ganaste ")
+            sendPoints(activeRow)
             setActivePosition(undefined)
             setActiveRow(undefined)
-            sendPoints(activeRow)
         } else {
             props.message(`Perdiste, la palabra era: ${props.word}`)
         }
@@ -100,10 +80,9 @@ const GameTable = (props) => {
 
     function handleSend(){
         const userWord = table[activeRow].toString().replace(/,/g,"").toLowerCase()
-        console.log(userWord)
-        console.log("CHECK", checkWord(userWord))
-        if(checkWord(userWord)){
-            console.log("PUSISTE UNA BIEN PA")
+        if (userWord.length != 5) return 
+        if(props.allWords.includes(userWord)){
+            props.message("")
             if(activePosition < 5) return
 
             if(userWord === props.word){
@@ -118,7 +97,7 @@ const GameTable = (props) => {
                 setActivePosition(0)
             }
         } else {
-            console.log("PONE UNA PALABRA BIEN PA")
+            props.message("La palabra no se encuentra en la lista")
         }
     }
 

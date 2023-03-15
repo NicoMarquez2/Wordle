@@ -7,23 +7,33 @@ import Stats from "./Stats";
 const Game = (props) => {
 
     const gameUrl = "http://localhost:8080/play"
+    const [allWords, setAllWords] = useState("")
     const [word, setWord] = useState("")
     const [message, setMessage] = useState("")
 
-    const getWord = async () => {
-        let myWord
+    function randomIndex(min, max){
+        min = Math.ceil(min)
+        max = Math.floor(max)
+        const wordIdx = Math.floor(Math.random() * (max - min + 1) + min)
+        return wordIdx
+    }
+
+    const getWords = async () => {
+        let myWords
+        let pickWord
         await fetch(gameUrl)
         .then((response) => response.json())
         .then((data) =>{
-            myWord = data[0].word
-            console.log(myWord)
-            setWord(myWord)            
+            myWords = data
+            pickWord = myWords[randomIndex(0,244)]
+            setWord(pickWord)
+            setAllWords(myWords)            
         })
         
     }
 
     useEffect(()=>{
-        getWord()
+        getWords()
     },[])
 
     const handleButton = () => {
@@ -37,7 +47,8 @@ const Game = (props) => {
                 <button onClick={handleButton}>Cerrar sesion</button>
             </div>
             <p className="message">{message}</p>
-            <GameTable word={word} message={setMessage}></GameTable>
+            <button onClick={() => console.log(word)}>MOSTRAR</button>
+            <GameTable allWords={allWords} word={word} message={setMessage}></GameTable>
             <TopStats></TopStats>
             <Stats></Stats>
         </div>

@@ -1,6 +1,6 @@
 # Wordle clone app (BackEnd)
 
-This project was made with Node.JS, Express and PostresSQL
+This project was made with Node.JS, Express, PostresSQL and Sequelize
 
 ## Config data base
 

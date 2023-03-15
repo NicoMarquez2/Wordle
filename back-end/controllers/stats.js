@@ -29,4 +29,16 @@ router.get('/all', async (req, res) => {
     }
 })
 
+router.post('/', async (req, res) => {
+    const userId = req.get("userId")
+    const user = await User.findAll({
+        where: {
+            id: userId
+        }
+    })
+    
+    console.log(user[0].dataValues)
+    body = req.body
+    
+})
 module.exports = router
