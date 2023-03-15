@@ -4,14 +4,14 @@ import WordInput from "./WordInput";
 
 const GameTable = (props) => {
     const validKeys = "qwertyuiopasdfghjklñzxcvbnm"
-    const gameUrl = "http://localhost:8080/play"
     const statsUrl = "http://localhost:8080/stats"
     const points = {
-        "0": 10,
-        "1": 8,
-        "2": 4,
-        "3": 2,
-        "4": 1
+        "0": 20,
+        "1": 15,
+        "2": 10,
+        "3": 6,
+        "4": 3,
+        "5": 1
     }
 
     const [table, setTable] =useState([
@@ -46,6 +46,7 @@ const GameTable = (props) => {
 
     function handleGameOver(isWinner){
         if(isWinner){
+            props.setRefresh(true)
             props.message("Felicidades, ganaste ")
             sendPoints(activeRow)
             setActivePosition(undefined)

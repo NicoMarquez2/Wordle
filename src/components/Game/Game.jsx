@@ -10,6 +10,7 @@ const Game = (props) => {
     const [allWords, setAllWords] = useState("")
     const [word, setWord] = useState("")
     const [message, setMessage] = useState("")
+    const [refresh, setRefresh] = useState(false)
 
     function randomIndex(min, max){
         min = Math.ceil(min)
@@ -48,9 +49,9 @@ const Game = (props) => {
             </div>
             <p className="message">{message}</p>
             <button onClick={() => console.log(word)}>MOSTRAR</button>
-            <GameTable allWords={allWords} word={word} message={setMessage}></GameTable>
-            <TopStats></TopStats>
-            <Stats></Stats>
+            <GameTable allWords={allWords} word={word} message={setMessage} setRefresh={setRefresh}></GameTable>
+            <TopStats refresh={refresh}></TopStats>
+            <Stats refresh={refresh}></Stats>
         </div>
     )
 }

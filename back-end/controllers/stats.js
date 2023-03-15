@@ -30,15 +30,15 @@ router.get('/all', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
+
     const userId = req.get("userId")
-    const user = await User.findAll({
-        where: {
-            id: userId
-        }
-    })
-    
-    console.log(user[0].dataValues)
-    body = req.body
+
+    await sequelize.query(       
+        'UPDATE user_stats SET points = (SELECT points FROM user_stats WHERE user_id = ' + userId + ') + ' + req.body.pointsGained + ','+
+        'streak = true,'+
+        'streak_points = (SELECT streak_points FROM user_stats WHERE user_id = '+ userId +') + 1 '+
+        'WHERE user_id ='+ userId
+    )
     
 })
 module.exports = router
